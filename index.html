@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GT Private Lending — Engineered to Close</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0D1410;
+  --white:  #F5F0E8;
+  --off:    #EDE8DC;
+  --panel:  #111A14;
+  --rim:    #D8D0BC;
+  --rim-d:  #1E2A22;
+  --gold:   #1E3D2A;
+  --gold-w: #2A5238;
+  --gold-hi:#3A6E4C;
+  --mist:   #7A8A7E;
+  --smoke:  #B8C0B0;
+  --charcoal:#2A3830;
+  --butter: #F5F0E8;
+  --forest: #1E3428;
+  --forest-light: #263E2E;
+  --forest-hi: #2E5040;
+  --navy:   #0D1820;
+  --navy-mid: #162030;
+  --slate:  #8A9A9E;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { background:var(--white); color:var(--ink); font-family:'Barlow',sans-serif; overflow-x:hidden; }
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-thumb { background:var(--forest); }
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes scaleIn { from{transform:scale(1.06)} to{transform:scale(1)} }
+@keyframes slideRight { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* ─── NAV ─── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:0 56px;
+  height:64px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background 0.4s, border-color 0.4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled {
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom-color:var(--rim);
+}
+nav.scrolled .nav-gt { background:linear-gradient(160deg,#1E3428,#2E5040); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+nav.scrolled .nav-name { color:var(--charcoal); }
+nav.scrolled .nav-links a { color:var(--charcoal); }
+nav.scrolled .nav-links a:hover { color:var(--ink); }
+nav.scrolled .nav-apply { background:var(--forest); color:var(--butter) !important; }
+nav.scrolled .nav-apply:hover { background:var(--forest-light); }
+
+.nav-logo { display:flex; align-items:baseline; gap:9px; text-decoration:none; cursor:pointer; }
+.nav-gt {
+  font-family:Georgia,serif;
+  font-size:26px; font-weight:700; font-style:italic;
+  background:linear-gradient(160deg,#E8E4DC,#A8A49C);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  letter-spacing:-1px; line-height:1;
+  transition: background 0.3s;
+}
+.nav-name {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:5px; text-transform:uppercase;
+  color:rgba(255,255,255,0.7); transition:color 0.3s;
+}
+.nav-links { display:flex; align-items:center; gap:36px; list-style:none; }
+.nav-links a {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(255,255,255,0.75); text-decoration:none; transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--white); }
+.nav-apply {
+  background:var(--white);
+  color:var(--ink) !important;
+  padding:10px 22px;
+  font-weight:700 !important;
+  letter-spacing:2px !important;
+  transition:background 0.2s, color 0.2s !important;
+}
+.nav-apply:hover { background:var(--forest-hi) !important; color:var(--butter) !important; }
+
+/* ─── HERO FULL SCREEN ─── */
+.hero {
+  position:relative;
+  height:100vh; min-height:640px;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  overflow:hidden;
+}
+
+/* dramatic black gradient background simulating night track */
+.hero-bg {
+  position:absolute; inset:0;
+  background: url('images/_DSC0814.jpg') center 30% / cover no-repeat;
+  animation: scaleIn 1.6s ease both;
+}
+
+/* carbon fiber texture */
+.hero-bg::before {
+  content:'';
+  position:absolute; inset:0;
+  background: transparent;
+}
+
+/* speed light trails — like a night shot of 911 GT3 on track */
+.hero-bg::after {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 30% at 75% 55%, rgba(20,36,28,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 20% at 20% 70%, rgba(13,24,32,0.3) 0%, transparent 50%);
+}
+
+/* Subtle speed lines on right */
+.hero-speed-lines {
+  position:absolute; right:0; top:0; bottom:0; width:35%; z-index:2;
+  background:repeating-linear-gradient(
+    180deg,
+    transparent 0px, transparent 18px,
+    rgba(20,38,30,0.1) 18px, rgba(20,38,30,0.1) 19px
+  );
+  pointer-events:none;
+}
+
+.hero-content {
+  position:relative; z-index:3;
+  padding:0 80px 80px;
+}
+.hero-eyebrow {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:6px; text-transform:uppercase;
+  color:var(--forest-hi);
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:24px;
+  animation:fadeIn 1s ease 0.3s both;
+}
+.hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--forest-hi); }
+
+.hero-headline {
+  font-family:Georgia,serif;
+  font-size:clamp(52px,7vw,96px); font-weight:700; line-height:0.95;
+  color:var(--white);
+  letter-spacing:-3px;
+  animation:fadeUp 1s ease 0.5s both;
+}
+.hero-headline em { color:#3E7050; font-style:italic; }
+
+.hero-sub {
+  margin-top:24px;
+  font-size:16px; font-weight:300; color:rgba(255,255,255,0.55);
+  max-width:480px; line-height:1.7;
+  animation:fadeUp 1s ease 0.7s both;
+}
+
+.hero-actions {
+  margin-top:40px;
+  display:flex; gap:14px; align-items:center;
+  animation:fadeUp 1s ease 0.9s both;
+}
+.btn-white {
+  background:var(--white); color:var(--ink);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:800; letter-spacing:3px; text-transform:uppercase;
+  padding:16px 36px; text-decoration:none; display:inline-block;
+  transition:background 0.2s, color 0.2s;
+}
+.btn-white:hover { background:var(--forest-light); color:var(--butter); }
+.btn-ghost {
+  color:rgba(255,255,255,0.65);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  padding:16px 24px; text-decoration:none; display:inline-block;
+  border:1px solid rgba(255,255,255,0.15);
+  transition:border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color:rgba(255,255,255,0.4); color:var(--white); }
+
+/* hero bottom bar */
+.hero-stats {
+  position:absolute; bottom:0; left:0; right:0; z-index:4;
+  display:grid; grid-template-columns:repeat(5,1fr);
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.hero-stat {
+  padding:20px 32px;
+  border-right:1px solid rgba(255,255,255,0.06);
+  animation:fadeIn 1s ease 1.1s both;
+}
+.hero-stat:last-child { border-right:none; }
+.hero-stat-num {
+  font-family:Georgia,serif;
+  font-size:26px; font-weight:700; font-style:italic;
+  color:#3E7050; line-height:1;
+}
+.hero-stat-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.45); margin-top:4px;
+}
+
+/* ─── SECTION BASE ─── */
+.section {
+  padding:120px 80px;
+}
+.section-eyebrow {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:6px; text-transform:uppercase;
+  color:var(--forest-hi); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-eyebrow::before { content:''; width:20px; height:1px; background:var(--forest-hi); flex-shrink:0; }
+.section-title {
+  font-family:Georgia,serif;
+  font-size:clamp(36px,4vw,60px); font-weight:700; line-height:1.05;
+  letter-spacing:-2px;
+}
+.section-title em { font-style:italic; color:var(--forest-hi); }
+
+/* ─── LOAN PROGRAMS — PORSCHE MODEL GRID ─── */
+#programs { background:var(--butter); padding:100px 0 0; }
+.programs-header { padding:0 80px 60px; }
+
+.programs-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0;
+  border-top:1px solid var(--rim);
+}
+.prog-card {
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  border-right:1px solid var(--rim);
+  background:var(--white);
+  transition:background 0.3s;
+}
+.prog-card:last-child { border-right:none; }
+
+/* Dark image-like background per card */
+.prog-card-bg {
+  height:260px;
+  position:relative;
+  overflow:hidden;
+  
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+.prog-card-bg::before {
+  content:'';
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  transition:transform 0.5s ease;
+}
+.prog-card:hover .prog-card-bg::before { transform:scale(1.04); }
+
+/* each card has unique gradient "photo" */
+
+
+
+
+
+
+/* speed line accent per card */
+.prog-card-bg::after {
+  content:'';
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(
+    -60deg,
+    transparent 0px, transparent 24px,
+    rgba(20,38,30,0.12) 24px, rgba(20,38,30,0.12) 25px
+  );
+}
+
+.prog-card-img {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:1;
+  display:block !important;
+}
+.prog-card-num {
+  position:absolute; top:24px; left:24px; z-index:3;
+  font-family:Georgia,serif;
+  font-size:11px; font-weight:700; font-style:italic;
+  color:rgba(184,145,58,0.5); letter-spacing:2px;
+}
+
+/* hover reveal CTA line */
+.prog-card-cta-line {
+  position:absolute; bottom:0; left:0; right:0; z-index:2;
+  height:3px;
+  background:linear-gradient(90deg,var(--forest),var(--forest-hi));
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.prog-card:hover .prog-card-cta-line { transform:scaleX(1); }
+
+.prog-card-body {
+  padding:28px 28px 32px;
+  border-top:1px solid var(--rim);
+  transition:border-color 0.3s;
+}
+.prog-card:hover .prog-card-body { border-top-color:var(--forest); }
+
+.prog-name {
+  font-family:Georgia,serif;
+  font-size:22px; font-weight:700;
+  color:var(--ink); margin-bottom:8px; line-height:1.1;
+}
+.prog-desc {
+  font-size:12px; font-weight:300; color:var(--mist);
+  line-height:1.7; margin-bottom:20px;
+}
+.prog-specs { display:flex; flex-direction:column; gap:0; }
+.prog-spec {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:7px 0; border-bottom:1px solid var(--rim);
+  font-size:11px;
+}
+.prog-spec:last-child { border-bottom:none; }
+.prog-spec-k {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:var(--smoke);
+}
+.prog-spec-v {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:700; letter-spacing:1px;
+  color:var(--forest-hi);
+}
+.prog-link {
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:20px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--ink); text-decoration:none;
+  transition:color 0.2s;
+}
+.prog-link::after { content:'→'; transition:transform 0.2s; }
+.prog-card:hover .prog-link { color:var(--forest-hi); }
+.prog-card:hover .prog-link::after { transform:translateX(4px); }
+
+/* ─── CINEMATIC ABOUT — split screen like Porsche model page ─── */
+#about { padding:0; display:grid; grid-template-columns:1fr 1fr; min-height:640px; }
+.about-visual {
+  background: url('images/_RAF5928.jpg') center center / cover no-repeat;
+  position:relative; overflow:hidden;
+  display:flex; align-items:flex-end; justify-content:center;
+  display:flex; align-items:center; justify-content:center;
+}
+.about-visual::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(45deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 9px),
+    repeating-linear-gradient(-45deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 9px);
+}
+.about-visual::after {
+  content:'';
+  position:absolute;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(20,36,28,0.3) 0%,transparent 70%);
+  inset:0; pointer-events:none;
+}
+.about-gt-mark {
+  font-family:Georgia,serif;
+  font-size:clamp(160px,18vw,260px); font-weight:700; font-style:italic;
+  background:linear-gradient(160deg,#2A4E3A 0%,#1A3226 30%,#223C2E 60%,#0E2018 80%,#162C20 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  letter-spacing:-12px; line-height:1;
+  user-select:none;
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+}
+.about-text {
+  padding:80px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+  background:var(--butter);
+}
+.about-body {
+  font-size:15px; font-weight:300; color:var(--charcoal);
+  line-height:2; margin-bottom:20px;
+}
+.about-body strong { color:var(--ink); font-weight:600; }
+.about-body em { color:var(--forest-hi); font-style:italic; }
+.about-pillars { margin-top:40px; display:flex; flex-direction:column; gap:0; }
+.pillar {
+  padding:18px 0;
+  border-bottom:1px solid var(--rim);
+  display:grid; grid-template-columns:28px 1fr;
+  gap:16px; align-items:start;
+}
+.pillar:last-child { border-bottom:none; }
+.pillar-n {
+  font-family:Georgia,serif; font-size:11px; font-weight:700; font-style:italic;
+  color:var(--forest-hi); padding-top:2px;
+}
+.pillar-t {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--ink); margin-bottom:3px;
+}
+.pillar-b { font-size:12px; font-weight:300; color:var(--mist); line-height:1.6; }
+
+/* ─── FULL BLEED PROCESS — dark like Porsche experience section ─── */
+#process {
+  background:var(--navy);
+  padding:0;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.process-header {
+  padding:80px 80px 60px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.process-header .section-title { color:var(--white); }
+.process-header .section-eyebrow { color:#4A8A62; }
+.process-header .section-eyebrow::before { background:#4A8A62; }
+.process-steps {
+  display:grid; grid-template-columns:repeat(5,1fr);
+}
+.step-card {
+  padding:56px 48px 64px;
+  border-right:1px solid rgba(255,255,255,0.06);
+  position:relative;
+  transition:background 0.3s;
+}
+.step-card:last-child { border-right:none; }
+.step-card:hover { background:var(--panel); }
+.step-n {
+  font-family:Georgia,serif;
+  font-size:72px; font-weight:700; font-style:italic;
+  color:rgba(255,255,255,0.04);
+  line-height:1; margin-bottom:20px;
+  display:block;
+}
+.step-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:var(--white); margin-bottom:12px;
+}
+.step-body {
+  font-size:13px; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.8;
+}
+.step-gold-bar {
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--forest-hi),#3E7050,transparent);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.step-card:hover .step-gold-bar { transform:scaleX(1); }
+
+/* ─── TAGLINE BAND ─── */
+.tagline-band {
+  background:var(--forest);
+  padding:48px 80px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.tagline-band-text {
+  font-family:Georgia,serif;
+  font-size:clamp(28px,3vw,44px); font-weight:700; font-style:italic;
+  color:var(--butter); letter-spacing:-1px;
+}
+.tagline-band-sub {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(245,240,232,0.4);
+}
+.tagline-band-cta {
+  background:var(--butter); color:var(--forest);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:800; letter-spacing:3px; text-transform:uppercase;
+  padding:16px 36px; text-decoration:none;
+  transition:background 0.2s;
+  flex-shrink:0;
+}
+.tagline-band-cta:hover { background:var(--off); }
+
+/* ─── CONTACT ─── */
+#contact {
+  padding:0;
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height:680px;
+}
+.contact-left {
+  background:var(--navy);
+  padding:80px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.contact-left::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 100% 80% at 20% 50%,rgba(20,36,28,0.3) 0%,transparent 60%);
+  pointer-events:none;
+}
+.contact-left .section-title { color:var(--white); position:relative; z-index:1; }
+.contact-left .section-eyebrow { position:relative; z-index:1; }
+.contact-meta { margin-top:48px; display:flex; flex-direction:column; gap:20px; position:relative; z-index:1; }
+.meta-item { display:flex; gap:14px; align-items:flex-start; }
+.meta-bar { width:2px; background:var(--forest-hi); flex-shrink:0; margin-top:4px; height:32px; opacity:0.5; }
+.meta-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(62,112,80,0.8); margin-bottom:3px;
+}
+.meta-val { font-size:14px; font-weight:400; color:rgba(255,255,255,0.7); }
+
+.contact-form-wrap {
+  background:var(--butter);
+  padding:80px 72px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.contact-form-wrap h3 {
+  font-family:Georgia,serif; font-size:24px; font-weight:700;
+  color:var(--ink); margin-bottom:32px; letter-spacing:-0.5px;
+}
+.form { display:flex; flex-direction:column; gap:14px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.fg { display:flex; flex-direction:column; gap:5px; }
+.fg.full { grid-column:1/-1; }
+label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:var(--mist);
+}
+input, select, textarea {
+  background:var(--white);
+  border:1px solid var(--rim);
+  color:var(--ink);
+  font-family:'Barlow',sans-serif;
+  font-size:13px; font-weight:300;
+  padding:13px 16px; outline:none;
+  transition:border-color 0.2s;
+  -webkit-appearance:none; appearance:none;
+}
+input:focus, select:focus, textarea:focus { border-color:var(--forest-hi); }
+input::placeholder, textarea::placeholder { color:var(--smoke); }
+select { cursor:pointer; }
+select option { background:var(--white); }
+textarea { resize:vertical; min-height:90px; }
+.btn-form {
+  background:var(--ink); color:var(--white);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; font-weight:800; letter-spacing:3px; text-transform:uppercase;
+  padding:18px; border:none; cursor:pointer; width:100%;
+  transition:background 0.2s; margin-top:4px;
+}
+.btn-form:hover { background:var(--forest); }
+.form-legal { font-size:10px; font-weight:300; color:var(--smoke); text-align:center; line-height:1.5; }
+
+/* ─── VIDEO BREAK ─── */
+.video-break {
+  position:relative;
+  height:480px;
+  overflow:hidden;
+  background: url('images/DRT_SUNDAY00397.jpg') center center / cover no-repeat;
+}
+.break-img {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:1;
+}
+.break-video {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  opacity:0.6;
+}
+.video-break-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(13,24,32,0.75) 0%,
+    rgba(30,52,40,0.5) 50%,
+    rgba(13,24,32,0.75) 100%
+  );
+}
+.video-break-content {
+  position:relative; z-index:2;
+  height:100%;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  text-align:center; padding:40px;
+}
+.video-break-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:6px; text-transform:uppercase;
+  color:rgba(74,138,98,0.8); margin-bottom:20px;
+}
+.video-break-quote {
+  font-family:Georgia,serif;
+  font-size:clamp(24px,3.5vw,44px); font-weight:700; font-style:italic;
+  color:var(--butter); line-height:1.2; letter-spacing:-1px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background:var(--navy);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:48px 80px 32px;
+}
+.footer-top {
+  display:grid; grid-template-columns:1fr 3fr;
+  gap:64px; padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.footer-brand {}
+.footer-gt {
+  font-family:Georgia,serif;
+  font-size:36px; font-weight:700; font-style:italic;
+  background:linear-gradient(160deg,#9A9890,#686660);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  letter-spacing:-2px; line-height:1; display:block; margin-bottom:6px;
+}
+.footer-name {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+}
+.footer-tagline {
+  font-family:Georgia,serif; font-size:12px; font-style:italic;
+  color:rgba(62,112,80,0.6); margin-top:12px;
+}
+.footer-links-grid {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:24px;
+}
+.footer-col-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(255,255,255,0.25); margin-bottom:16px;
+}
+.footer-col-links { display:flex; flex-direction:column; gap:10px; }
+.footer-col-links a {
+  font-size:12px; font-weight:300; color:rgba(255,255,255,0.45);
+  text-decoration:none; transition:color 0.2s;
+}
+.footer-col-links a:hover { color:#3E7050; }
+.footer-bottom {
+  padding-top:24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.footer-copy {
+  font-size:10px; font-weight:300; color:rgba(255,255,255,0.2); letter-spacing:1px;
+}
+.footer-legal {
+  display:flex; gap:24px;
+}
+.footer-legal a {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.2); text-decoration:none; transition:color 0.2s;
+}
+.footer-legal a:hover { color:#3E7050; }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:768px){
+  nav { padding:0 24px; }
+  .nav-links { display:none; }
+  .hero-content { padding:0 24px 100px; }
+  .hero-stats { grid-template-columns:1fr 1fr; }
+  .section { padding:80px 24px; }
+  .programs-header { padding:0 24px 40px; }
+  .programs-grid { grid-template-columns:1fr; }
+  #about, #contact { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .tagline-band { flex-direction:column; gap:24px; padding:40px 24px; }
+  footer { padding:40px 24px 24px; }
+  .footer-top { grid-template-columns:1fr; gap:32px; }
+  .footer-links-grid { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#home">
+    <span class="nav-gt">GT</span>
+    <span class="nav-name">Private Lending</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#programs">Loan Programs</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#contact" class="nav-apply">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-overlay"></div>
+  <video class="hero-video" autoplay muted loop playsinline poster="">
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-speed-lines"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Direct Lending · Institutional Capital · Nationwide</div>
+    <h1 class="hero-headline">Capital<br>engineered<br>to <em>close.</em></h1>
+    <p class="hero-sub">GT Private Lending is a direct lender backed by institutional capital — built for real estate investors who demand speed, flexibility, and a partner that closes.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-white">Apply Now</a>
+      <a href="#programs" class="btn-ghost">View Loan Programs</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$2B+</div>
+      <div class="hero-stat-label">Industry Track Record</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">7 Days</div>
+      <div class="hero-stat-label">Fastest Close</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">95%</div>
+      <div class="hero-stat-label">Close Rate</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">50 States</div>
+      <div class="hero-stat-label">Nationwide</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOAN PROGRAMS -->
+<section id="programs">
+  <div class="programs-header reveal">
+    <div class="section-eyebrow">Loan Programs</div>
+    <h2 class="section-title">Built for every stage<br>of the <em>deal.</em></h2>
+  </div>
+
+  <div class="programs-grid">
+    <div class="prog-card reveal">
+      <div class="prog-card-bg bg-ff">
+        <img src="images/25FLATSIXFEST01121.jpg" class="prog-card-img" alt="">
+        <div class="prog-card-num">01</div>
+        <div class="prog-card-cta-line"></div>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-name">Fix &amp; Flip</div>
+        <div class="prog-desc">Short-term acquisition and renovation financing. Fast close, flexible draws.</div>
+        <div class="prog-specs">
+          <div class="prog-spec"><span class="prog-spec-k">Max Loan</span><span class="prog-spec-v">$5,000,000</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTV</span><span class="prog-spec-v">90%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTC</span><span class="prog-spec-v">92.5%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTARV</span><span class="prog-spec-v">75%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Term</span><span class="prog-spec-v">6 – 24 Months</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Rates From</span><span class="prog-spec-v">8.00%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min FICO</span><span class="prog-spec-v">600</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Experience</span><span class="prog-spec-v">None Required</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Foreign Nationals</span><span class="prog-spec-v">Accepted</span></div>
+        </div>
+        <a href="#contact" class="prog-link">Learn More</a>
+      </div>
+    </div>
+
+    <div class="prog-card reveal">
+      <div class="prog-card-bg bg-gc2">
+        <img src="images/WE16PANA00245.jpg" class="prog-card-img" alt="">
+        <div class="prog-card-num">02</div>
+        <div class="prog-card-cta-line"></div>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-name">Residential Bridge</div>
+        <div class="prog-desc">Short-term bridge financing for residential investors who need to act fast and close with certainty.</div>
+        <div class="prog-specs">
+          <div class="prog-spec"><span class="prog-spec-k">Max Loan</span><span class="prog-spec-v">$5,000,000</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTV</span><span class="prog-spec-v">90%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTC</span><span class="prog-spec-v">92.5%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTARV</span><span class="prog-spec-v">75%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Term</span><span class="prog-spec-v">6 – 24 Months</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Rates From</span><span class="prog-spec-v">8.00%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min FICO</span><span class="prog-spec-v">600</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Experience</span><span class="prog-spec-v">None Required</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Foreign Nationals</span><span class="prog-spec-v">Accepted</span></div>
+        </div>
+        <a href="#contact" class="prog-link">Learn More</a>
+      </div>
+    </div>
+
+    <div class="prog-card reveal">
+      <div class="prog-card-bg bg-dscr">
+        <img src="images/26FLATSIXFEST01059.jpg" class="prog-card-img" alt="">
+        <div class="prog-card-num">03</div>
+        <div class="prog-card-cta-line"></div>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-name">DSCR Rental</div>
+        <div class="prog-desc">Long-term rental financing based on property cash flow. Scale your portfolio.</div>
+        <div class="prog-specs">
+          <div class="prog-spec"><span class="prog-spec-k">Max Loan</span><span class="prog-spec-v">$3,000,000</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTV</span><span class="prog-spec-v">80%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min DSCR</span><span class="prog-spec-v">≥ 0.75x</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Amortization</span><span class="prog-spec-v">30-Yr or I/O</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Rates From</span><span class="prog-spec-v">5.50%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min FICO</span><span class="prog-spec-v">660</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">STR / Airbnb</span><span class="prog-spec-v">Allowed</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Property Types</span><span class="prog-spec-v">1–10 Units</span></div>
+        </div>
+        <a href="#contact" class="prog-link">Learn More</a>
+      </div>
+    </div>
+
+    <div class="prog-card reveal">
+      <div class="prog-card-bg bg-br">
+        <img src="images/FRIDAYMUGELLO00543.jpg" class="prog-card-img" alt="">
+        <div class="prog-card-num">03</div>
+        <div class="prog-card-cta-line"></div>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-name">Multifamily Bridge</div>
+        <div class="prog-desc">Transitional capital for multifamily investors who need to act fast and bridge to permanent financing.</div>
+        <div class="prog-specs">
+          <div class="prog-spec"><span class="prog-spec-k">Max Loan</span><span class="prog-spec-v">$8,500,000</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTV</span><span class="prog-spec-v">75%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTC</span><span class="prog-spec-v">85%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTARV</span><span class="prog-spec-v">70%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Term</span><span class="prog-spec-v">12 – 24 Months</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Rates From</span><span class="prog-spec-v">9.00%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min FICO</span><span class="prog-spec-v">650</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Property</span><span class="prog-spec-v">5–50 Units</span></div>
+        </div>
+        <a href="#contact" class="prog-link">Learn More</a>
+      </div>
+    </div>
+
+    <div class="prog-card reveal">
+      <div class="prog-card-bg bg-gc">
+        <img src="images/PREWAR00688.jpg" class="prog-card-img" alt="">
+        <div class="prog-card-num">05</div>
+        <div class="prog-card-cta-line"></div>
+      </div>
+      <div class="prog-card-body">
+        <div class="prog-name">Ground-Up</div>
+        <div class="prog-desc">New construction financing for residential builders aligned to your milestones.</div>
+        <div class="prog-specs">
+          <div class="prog-spec"><span class="prog-spec-k">Max Loan</span><span class="prog-spec-v">$10,000,000</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max As-Is LTV</span><span class="prog-spec-v">80%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTC</span><span class="prog-spec-v">85%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max TLTC</span><span class="prog-spec-v">90%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Max LTARV</span><span class="prog-spec-v">75%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Term</span><span class="prog-spec-v">12 / 18 / 24 Months</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Rates From</span><span class="prog-spec-v">8.50%</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Min FICO</span><span class="prog-spec-v">660</span></div>
+          <div class="prog-spec"><span class="prog-spec-k">Experience</span><span class="prog-spec-v">1+ GUC Project</span></div>
+        </div>
+        <a href="#contact" class="prog-link">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — cinematic split -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-gt-mark">GT</div>
+  </div>
+  <div class="about-text">
+    <div class="section-eyebrow reveal">About GT</div>
+    <h2 class="section-title reveal">Built by enthusiasts.<br><em>Engineered for performance.</em></h2>
+    <p class="about-body reveal" style="margin-top:28px;">GT was born from a lifelong obsession. Our founders have been <strong>amateur racing drivers since childhood</strong> — the kind of people who grew up studying lap times, dissecting suspension geometry, and chasing the perfect corner exit. That love for the <em>flawless engineering of high-performance machines</em> became the lens through which we built everything.</p>
+    <p class="about-body reveal">We brought that same relentless pursuit of precision to private lending. GT is a <strong>Florida-based, nationwide direct lender</strong> — operating in partnership with the highest and most flexible institutional capital available. We don't just place loans. We engineer them.</p>
+    <p class="about-body reveal">With <strong>over 10 years in the industry</strong> and more than <strong>$2 billion funded</strong> across our previous ventures, we are veterans who know this market from every angle — and we built GT to be the lender we always wished existed.</p>
+    <div class="about-pillars reveal">
+      <div class="pillar"><div class="pillar-n">01</div><div><div class="pillar-t">Institutional-Grade Capital</div><div class="pillar-b">Backed by the most flexible institutional capital available — with the speed and decisiveness of a direct lender.</div></div></div>
+      <div class="pillar"><div class="pillar-n">02</div><div><div class="pillar-t">$2B+ Track Record</div><div class="pillar-b">10+ years and over $2 billion funded. We've seen every deal structure, every market cycle, every curveball.</div></div></div>
+      <div class="pillar"><div class="pillar-n">03</div><div><div class="pillar-t">Speed by Design</div><div class="pillar-b">Pre-approvals in 24 hours. Closes in as few as 7 days. Engineered to move at your pace.</div></div></div>
+      <div class="pillar"><div class="pillar-n">04</div><div><div class="pillar-t">Nationwide</div><div class="pillar-b">Licensed and lending across all 50 states.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO BREAK — cinematic full bleed -->
+<div class="video-break">
+  <img src="images/DRT_SUNDAY00397.jpg" class="break-img" alt="">
+  <div class="video-break-overlay"></div>
+  <div class="video-break-content">
+    <div class="video-break-label">GT Private Lending</div>
+    <div class="video-break-quote">The same precision that wins on track<br>closes deals that others can't.</div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header">
+    <div class="section-eyebrow reveal">The GT Process</div>
+    <h2 class="section-title reveal">Four steps. Zero surprises.</h2>
+  </div>
+  <div class="process-steps">
+    <div class="step-card reveal">
+      <div class="step-gold-bar"></div>
+      <span class="step-n">01</span>
+      <div class="step-title">Submit</div>
+      <div class="step-body">Fill out our streamlined application. Just the essentials — no 40-page packets.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-gold-bar"></div>
+      <span class="step-n">02</span>
+      <div class="step-title">Pre-Approval</div>
+      <div class="step-body">Receive a term sheet within 24 hours. Clear terms, no surprises.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-gold-bar"></div>
+      <span class="step-n">03</span>
+      <div class="step-title">Processing</div>
+      <div class="step-body">Appraisal, title, and underwriting run in parallel. Every day counts.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-gold-bar"></div>
+      <span class="step-n">04</span>
+      <div class="step-title">Close</div>
+      <div class="step-body">Funds wire to closing. Deal done. Engineered to close — every time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TAGLINE BAND -->
+<div class="tagline-band">
+  <div>
+    <div class="tagline-band-sub">GT Private Lending</div>
+    <div class="tagline-band-text">Engineered to Close.</div>
+  </div>
+  <a href="#contact" class="tagline-band-cta">Apply Now →</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-left">
+    <div class="section-eyebrow reveal">Get Funded</div>
+    <h2 class="section-title reveal">Start your<br><em>Grand Tour.</em></h2>
+    <div class="contact-meta reveal">
+      <div class="meta-item">
+        <div class="meta-bar"></div>
+        <div><div class="meta-label">Response Time</div><div class="meta-val">Within 24 hours</div></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-bar"></div>
+        <div><div class="meta-label">Lending Territory</div><div class="meta-val">All 50 States</div></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-bar"></div>
+        <div><div class="meta-label">Email</div><div class="meta-val">info@gtprivatelending.com</div></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-bar"></div>
+        <div><div class="meta-label">Headquarters</div><div class="meta-val">1085 NW 62nd St, Miami, FL 33150</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-wrap">
+    <h3>Loan Request</h3>
+    <form class="form" netlify name="loan-application" netlify-honeypot="bot-field" action="/thank-you" method="POST">
+      <input type="hidden" name="form-name" value="loan-application">
+      <input type="hidden" name="bot-field" style="display:none">
+      <div class="form-row">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="John"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Email</label><input type="email" placeholder="john@email.com"></div>
+        <div class="fg"><label>Phone</label><input type="tel" placeholder="(305) 000-0000"></div>
+      </div>
+      <div class="fg full">
+        <label>Loan Program</label>
+        <select>
+          <option value="" disabled selected>Select a program</option>
+          <option>Fix &amp; Flip</option>
+          <option>DSCR Rental</option>
+          <option>Bridge Loan</option>
+          <option>Ground-Up Construction</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Loan Amount</label><input type="text" placeholder="$500,000"></div>
+        <div class="fg"><label>Property State</label><input type="text" placeholder="Florida"></div>
+      </div>
+      <div class="fg full">
+        <label>Deal Summary</label>
+        <textarea placeholder="Brief description of the property and your strategy..."></textarea>
+      </div>
+      <button type="submit" class="btn-form">Submit Loan Request →</button>
+      <p class="form-legal">A GT lending specialist will reach out within 24 hours. No spam, ever.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-gt">GT</span>
+      <div class="footer-name">Private Lending</div>
+      <div class="footer-tagline">Engineered to Close.</div>
+    </div>
+    <div class="footer-links-grid">
+      <div>
+        <div class="footer-col-title">Programs</div>
+        <div class="footer-col-links">
+          <a href="#programs">Fix &amp; Flip</a>
+          <a href="#programs">Residential Bridge</a>
+          <a href="#programs">DSCR Rental</a>
+          <a href="#programs">Multifamily Bridge</a>
+          <a href="#programs">Ground-Up Construction</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-col-links">
+          <a href="#about">About GT</a>
+          <a href="#process">How It Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">For Partners</div>
+        <div class="footer-col-links">
+          <a href="#contact">Broker Program</a>
+          <a href="#contact">IMB Partners</a>
+          <a href="#contact">Submit a Deal</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-col-links">
+          <a href="mailto:info@gtprivatelending.com">info@gtprivatelending.com</a>
+          <a href="#">1085 NW 62nd St, Miami, FL 33150</a>
+          <a href="#">Nationwide</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 GT Private Lending LLC. All rights reserved. NMLS #000000</div>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Licensing</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll behavior — transparent to white like Porsche
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => ro.observe(el));
+  // Force reveal all prog-cards immediately
+  document.querySelectorAll('.prog-card.reveal').forEach(el => el.classList.add('visible'));
+
+  // Video loading — fade in when ready
+  document.querySelectorAll('video').forEach(v => {
+    v.addEventListener('canplay', () => v.classList.add('loaded'));
+    // If video src is empty, keep bg showing
+    if (!v.querySelector('source') || !v.querySelector('source').src) {
+      v.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
